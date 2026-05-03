@@ -2,15 +2,5 @@
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "nextjs",
-  "env": [
-    "MONGODB_URI",
-    "RESEND_API_KEY",
-    "STRIPE_SECRET_KEY",
-    "JWT_SECRET",
-    "ADMIN_EMAIL",
-    "ADMIN_PASSWORD",
-    "NEXT_PUBLIC_SITE_URL",
-    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
-  ]
+  "framework": "nextjs"
 }
