@@ -1,26 +1,112 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --clr-primary:   #b5451b;
+  --clr-secondary: #f4a229;
+  --clr-dark:      #1a1a1a;
+  --clr-dark2:     #2c2c2c;
+  --clr-light:     #fdf6ec;
+  --clr-muted:     #777777;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--clr-light);
+  color: var(--clr-dark);
+  font-family: 'Lato', Arial, sans-serif;
+  line-height: 1.7;
 }
+
+h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; }
+
+/* Section utilities */
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--clr-primary);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+.section-subtitle {
+  text-align: center;
+  color: var(--clr-muted);
+  margin-bottom: 3rem;
+  font-size: 1.05rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  text-decoration: none;
+}
+.btn-primary { background: var(--clr-primary); color: #fff; }
+.btn-primary:hover { background: #962f10; }
+.btn-outline { background: transparent; border-color: #fff; color: #fff; }
+.btn-outline:hover { background: #fff; color: var(--clr-primary); }
+
+/* Left-aligned heading underline */
+.left-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.left-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 4px;
+  background: var(--clr-primary);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+
+/* Form shared styles */
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+.form-group label { font-weight: 700; font-size: 0.92rem; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: 'Lato', Arial, sans-serif;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--clr-primary);
+  background: #fff;
+}
+.form-group textarea { resize: vertical; min-height: 110px; }
+
+/* Veg/non-veg badge */
+.veg-badge, .nonveg-badge {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 4px;
+  position: relative;
+}
+.veg-badge { border: 2px solid green; background: #e9f7ee; }
+.veg-badge::after { content: '●'; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 8px; color: green; }
+.nonveg-badge { border: 2px solid red; background: #fdecea; }
+.nonveg-badge::after { content: '●'; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 8px; color: red; }
