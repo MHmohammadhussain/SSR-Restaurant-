@@ -3,9 +3,13 @@ import MenuItem from '@/lib/models/MenuItem';
 import { NextRequest, NextResponse } from 'next/server';
 import { Types } from 'mongoose';
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
   try {
     await connectDB();
+    const params = await context.params;
     const { id } = params;
     const body = await request.json();
 
@@ -35,9 +39,13 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
   try {
     await connectDB();
+    const params = await context.params;
     const { id } = params;
 
     if (!Types.ObjectId.isValid(id)) {

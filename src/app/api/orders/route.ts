@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     await connectDB();
     const body = await request.json();
 
-    const { fullName, phone, deliveryAddress, pinCode, orderDescription, paymentMethod, preferredTime, specialInstructions } = body;
+    const { fullName, phone, email, deliveryAddress, pinCode, orderDescription, paymentMethod, preferredTime, specialInstructions } = body;
 
     // Validation
     if (!fullName || !phone || !deliveryAddress || !pinCode || !orderDescription || !preferredTime) {
@@ -46,8 +46,10 @@ export async function POST(request: NextRequest) {
 
     await order.save();
 
-    // Send confirmation email
-    await sendOrderConfirmation(phone, fullName, order._id.toString(), estimatedAmount);
+    // Send confirmation email only when a valid email is provided
+    if (typeof email === 'string' && email.includes('@')) {
+      await sendOrderConfirmation(email, fullName, order._id.toString(), estimatedAmount);
+    }
 
     return NextResponse.json(
       {
