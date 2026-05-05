@@ -33,7 +33,7 @@ export async function sendReservationConfirmation(
             <p><strong>Guests:</strong> ${guests} people</p>
           </div>
           <p>We look forward to serving you authentic South Indian Andhra cuisine!</p>
-          <p>For any changes or cancellations, please call us at <strong>+91 98765 43210</strong></p>
+          <p>For any changes or cancellations, please call us at <strong>+91 9491437799</strong></p>
           <p>Best regards,<br><strong>SSR Restaurant Team</strong></p>
         </div>
       `,
@@ -69,7 +69,7 @@ export async function sendOrderConfirmation(
             <p><strong>Amount:</strong> ₹${amount}</p>
             <p><strong>Status:</strong> Preparing your delicious meal...</p>
           </div>
-          <p>Your order will be delivered soon. You can track your delivery status or call us at <strong>+91 98765 43210</strong></p>
+          <p>Your order will be delivered soon. You can track your delivery status or call us at <strong>+91 9491437799</strong></p>
           <p>Best regards,<br><strong>SSR Restaurant Team</strong></p>
         </div>
       `,
@@ -103,7 +103,7 @@ export async function sendContactReply(
             <p><strong>Your Message:</strong></p>
             <p>${message}</p>
           </div>
-          <p>If you need immediate assistance, please call us at <strong>+91 98765 43210</strong></p>
+          <p>If you need immediate assistance, please call us at <strong>+91 9491437799</strong></p>
           <p>Best regards,<br><strong>SSR Restaurant Team</strong></p>
         </div>
       `,

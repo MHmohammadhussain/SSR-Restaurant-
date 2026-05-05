@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 const dishes = [
-  { emoji: '🍛', name: 'Andhra Chicken Curry', desc: 'Fiery coconut-based gravy with slow-cooked chicken.', price: '₹320', bg: 'linear-gradient(135deg,#b5451b,#f4a229)' },
-  { emoji: '🥘', name: 'Pesarattu', desc: 'Crispy green moong dal crepe served with ginger chutney.', price: '₹120', bg: 'linear-gradient(135deg,#2d7a35,#a4d86e)' },
-  { emoji: '🍱', name: 'Andhra Meals Thali', desc: 'Rice, dal, sambar, rasam, 4 curries, papad & pickle.', price: '₹280', bg: 'linear-gradient(135deg,#c07530,#f9d05e)' },
-  { emoji: '🍲', name: 'Gongura Mutton', desc: 'Tender mutton cooked with tangy sorrel leaves.', price: '₹420', bg: 'linear-gradient(135deg,#8b2252,#e87bb0)' },
-  { emoji: '🐟', name: 'Royyala Iguru', desc: 'Spicy prawn dry roast with coastal spices.', price: '₹380', bg: 'linear-gradient(135deg,#1a6e7a,#5bc8d5)' },
-  { emoji: '🍚', name: 'Pulihora', desc: 'Tamarind rice tempered with mustard, peanuts & curry leaves.', price: '₹150', bg: 'linear-gradient(135deg,#5a4a10,#d4a017)' },
+  { emoji: '🍗', name: 'Chicken Dum Biryani', desc: 'Slow-cooked dum biryani packed with bold spice.', price: '₹230', bg: 'linear-gradient(135deg,#b5451b,#f4a229)' },
+  { emoji: '🍖', name: 'Mutton Dum Biryani', desc: 'Tender mutton layered in aromatic dum rice.', price: '₹400', bg: 'linear-gradient(135deg,#8b2252,#e87bb0)' },
+  { emoji: '🦐', name: 'Prawns Pulav', desc: 'Fragrant prawn pulav with coastal-style masala.', price: '₹260', bg: 'linear-gradient(135deg,#1a6e7a,#5bc8d5)' },
+  { emoji: '🧀', name: 'Paneer Biryani', desc: 'Paneer cubes cooked in rich biryani masala.', price: '₹220', bg: 'linear-gradient(135deg,#2d7a35,#a4d86e)' },
+  { emoji: '🍗', name: 'Butter Chicken', desc: 'Creamy tomato gravy with juicy chicken.', price: '₹240', bg: 'linear-gradient(135deg,#c07530,#f9d05e)' },
+  { emoji: '🍗', name: 'Chicken 65', desc: 'Crispy, spicy and always crowd-favorite.', price: '₹200', bg: 'linear-gradient(135deg,#7a2a0d,#d96f3f)' },
 ];
 
 const features = [
@@ -17,9 +17,9 @@ const features = [
 ];
 
 const reviews = [
-  { stars: 5, text: '"The Andhra Meals Thali was absolutely incredible! Every item on the banana leaf was perfectly spiced. Felt just like home."', name: 'Priya Reddy' },
-  { stars: 5, text: '"Best Gongura Mutton I\'ve had outside of Andhra. The staff is warm and the ambience is wonderful. Highly recommend!"', name: 'Venkat Rao' },
-  { stars: 4, text: '"Loved the Pesarattu and filter coffee combo. Delivery was on time and food was still hot. Will definitely order again."', name: 'Aditi Sharma' },
+  { stars: 5, text: '"Chicken Dum Biryani was perfectly cooked and full of flavor. One of the best in town."', name: 'Priya Reddy' },
+  { stars: 5, text: '"The Mutton Dum Biryani and Butter Chicken combo was outstanding. Great food and service!"', name: 'Venkat Rao' },
+  { stars: 4, text: '"Loved the Paneer Biryani and Veg Fried Rice. Delivery was quick and food arrived hot."', name: 'Aditi Sharma' },
 ];
 
 export default function Home() {

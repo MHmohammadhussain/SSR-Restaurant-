@@ -62,10 +62,10 @@ export default function ContactPage() {
           <div>
             <h3 className="font-serif text-2xl mb-6">Get in Touch</h3>
             {[
-              { icon: '📍', label: 'Address', text: '123 Spice Lane, Banjara Hills,\nHyderabad, Telangana – 500034' },
-              { icon: '📞', label: 'Phone', text: '+91 98765 43210\n+91 87654 32109' },
+              { icon: '📍', label: 'Address', text: 'Taluka center, MRO OFFICE, Opposite SSR FAMILY RESTAURANT,\nKAIKALUR, Andhra Pradesh 521333' },
+              { icon: '📞', label: 'Phone', text: '+91 9491437799' },
               { icon: '✉️', label: 'Email', text: 'hello@ssrrestaurant.com\nreservations@ssrrestaurant.com' },
-              { icon: '🕐', label: 'Hours', text: 'Mon–Thu: 11 AM – 10 PM\nFri–Sat: 11 AM – 11 PM\nSun: 12 PM – 10 PM' },
+              { icon: '🕐', label: 'Hours', text: 'Daily: 11 AM – 3:30 PM, 6 – 10:30 PM' },
             ].map((d) => (
               <div key={d.label} className="flex gap-4 mb-6">
                 <div

@@ -126,11 +126,11 @@ export default function DeliveryPage() {
               <form onSubmit={handleSubmit} noValidate>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="form-group"><label>Full Name *</label><input type="text" name="fullName" placeholder="Your name" required /></div>
-                  <div className="form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="+91 98765 43210" required /></div>
+                  <div className="form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="+91 9491437799" required /></div>
                 </div>
                 <div className="form-group"><label>Delivery Address *</label><textarea name="deliveryAddress" placeholder="Full address including flat no., street, area…" required style={{ minHeight: '80px' }} /></div>
                 <div className="form-group"><label>PIN Code *</label><input type="text" name="pinCode" placeholder="500034" maxLength={6} pattern="[0-9]{6}" required /></div>
-                <div className="form-group"><label>Your Order *</label><textarea name="orderDescription" placeholder="e.g. 2x Andhra Chicken Curry, 1x Biryani, 2x Pesarattu…" required /></div>
+                <div className="form-group"><label>Your Order *</label><textarea name="orderDescription" placeholder="e.g. 1x Chicken Dum Biryani, 1x Butter Chicken, 2x Veg Fried Rice..." required /></div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="form-group">
                     <label>Payment Method *</label>

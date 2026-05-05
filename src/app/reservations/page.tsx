@@ -74,7 +74,7 @@ export default function ReservationsPage() {
               <h4 className="font-bold mb-4" style={{ color: '#b5451b' }}>Opening Hours</h4>
               <table className="w-full text-sm">
                 <tbody>
-                  {[['Monday – Thursday', '11 AM – 10 PM'], ['Friday – Saturday', '11 AM – 11 PM'], ['Sunday', '12 PM – 10 PM']].map(([day, hrs]) => (
+                  {[['Daily', '11 AM – 3:30 PM, 6 – 10:30 PM']].map(([day, hrs]) => (
                     <tr key={day} className="border-b border-gray-100">
                       <td className="py-2">{day}</td>
                       <td className="py-2 text-right font-bold">{hrs}</td>
@@ -86,7 +86,7 @@ export default function ReservationsPage() {
 
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <h4 className="font-bold mb-3" style={{ color: '#b5451b' }}>Private Events</h4>
-              <p className="text-[#555] text-sm">Hosting a birthday, anniversary or corporate event? We offer exclusive dining packages. Call us at <strong>+91 98765 43210</strong> to discuss your requirements.</p>
+              <p className="text-[#555] text-sm">Hosting a birthday, anniversary or corporate event? We offer exclusive dining packages. Call us at <strong>+91 9491437799</strong> to discuss your requirements.</p>
             </div>
           </div>
 
@@ -118,9 +118,13 @@ export default function ReservationsPage() {
                     <label>Guests *</label>
                     <select name="guests" required defaultValue="">
                       <option value="" disabled>Select</option>
-                      {['1 Person','2 People','3 People','4 People','5–6 People','7–10 People','10+ People'].map((o) => (
-                        <option key={o}>{o}</option>
-                      ))}
+                      <option value="1">1 Person</option>
+                      <option value="2">2 People</option>
+                      <option value="3">3 People</option>
+                      <option value="4">4 People</option>
+                      <option value="6">5–6 People</option>
+                      <option value="10">7–10 People</option>
+                      <option value="12">10+ People</option>
                     </select>
                   </div>
                   <div className="form-group">

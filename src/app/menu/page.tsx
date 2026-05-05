@@ -5,53 +5,86 @@ import { useState } from 'react';
 type MenuItem = { cat: string; emoji: string; name: string; desc: string; price: string; veg: boolean };
 
 const MENU: MenuItem[] = [
-  // Starters
-  { cat: 'starters', emoji: '🥚', name: 'Egg Bajji', desc: 'Boiled egg fritters with spiced chickpea batter.', price: '₹80', veg: false },
-  { cat: 'starters', emoji: '🌶️', name: 'Mirchi Bajji', desc: 'Green chilli stuffed with spiced potato, deep fried.', price: '₹70', veg: true },
-  { cat: 'starters', emoji: '🍗', name: 'Chicken 65', desc: 'Deep-fried chicken marinated in chilli & yoghurt batter.', price: '₹220', veg: false },
-  { cat: 'starters', emoji: '🥬', name: 'Aloo Vada', desc: 'Crispy potato fritters with chutneys.', price: '₹90', veg: true },
-  { cat: 'starters', emoji: '🦐', name: 'Prawn Fry', desc: 'Crispy coastal-style fried prawns with lime.', price: '₹280', veg: false },
-  // Tiffin
-  { cat: 'tiffin', emoji: '🫓', name: 'Pesarattu', desc: 'Crispy green moong dal crepe with ginger chutney.', price: '₹120', veg: true },
-  { cat: 'tiffin', emoji: '🥞', name: 'Idly (4 pcs)', desc: 'Soft steamed rice cakes served with sambar & chutney.', price: '₹80', veg: true },
-  { cat: 'tiffin', emoji: '🍳', name: 'Masala Dosa', desc: 'Crispy dosa with spiced potato filling.', price: '₹130', veg: true },
-  { cat: 'tiffin', emoji: '🧇', name: 'Uttapam', desc: 'Thick rice pancake topped with onion & tomato.', price: '₹110', veg: true },
-  { cat: 'tiffin', emoji: '🍜', name: 'Upma', desc: 'Semolina porridge with vegetables & tempering.', price: '₹90', veg: true },
-  // Main Course
-  { cat: 'main', emoji: '🍛', name: 'Andhra Chicken Curry', desc: 'Fiery coconut-based chicken curry.', price: '₹320', veg: false },
-  { cat: 'main', emoji: '🍲', name: 'Gongura Mutton', desc: 'Tender mutton with tangy sorrel leaves.', price: '₹420', veg: false },
-  { cat: 'main', emoji: '🐟', name: 'Fish Pulusu', desc: 'Tamarind-based fish stew with Andhra spices.', price: '₹350', veg: false },
-  { cat: 'main', emoji: '🥘', name: 'Gutti Vankaya', desc: 'Stuffed baby brinjal curry — a classic Andhra dish.', price: '₹210', veg: true },
-  { cat: 'main', emoji: '🫘', name: 'Dal Tadka', desc: 'Yellow lentils with mustard, garlic & dried chilli.', price: '₹180', veg: true },
-  { cat: 'main', emoji: '🥬', name: 'Palak Paneer', desc: 'Cottage cheese in a silky spinach gravy.', price: '₹220', veg: true },
-  // Rice & Biryani
-  { cat: 'rice', emoji: '🍱', name: 'Andhra Meals Thali', desc: 'Rice, dal, sambar, rasam, 4 curries, papad & pickle.', price: '₹280', veg: false },
-  { cat: 'rice', emoji: '🍚', name: 'Pulihora', desc: 'Tamarind rice with mustard, peanuts & curry leaves.', price: '₹150', veg: true },
-  { cat: 'rice', emoji: '🍗', name: 'Chicken Biryani', desc: 'Fragrant basmati rice with spiced chicken.', price: '₹360', veg: false },
-  { cat: 'rice', emoji: '🥦', name: 'Vegetable Biryani', desc: 'Aromatic basmati rice with mixed vegetables.', price: '₹260', veg: true },
-  { cat: 'rice', emoji: '🦐', name: 'Prawn Biryani', desc: 'Succulent prawns layered in biryani masala rice.', price: '₹420', veg: false },
-  { cat: 'rice', emoji: '🍳', name: 'Egg Fried Rice', desc: 'Wok-tossed rice with egg and vegetables.', price: '₹180', veg: false },
-  // Desserts
-  { cat: 'desserts', emoji: '🍮', name: 'Pala Munjalu', desc: 'Soft milk-dumplings in sugar syrup.', price: '₹120', veg: true },
-  { cat: 'desserts', emoji: '🍡', name: 'Bobbatlu', desc: 'Sweet lentil-stuffed flatbread.', price: '₹100', veg: true },
-  { cat: 'desserts', emoji: '🧁', name: 'Double Ka Meetha', desc: 'Hyderabadi bread pudding with rabri.', price: '₹130', veg: true },
-  { cat: 'desserts', emoji: '🍨', name: 'Kulfi Falooda', desc: 'Dense Indian ice cream with rose falooda.', price: '₹110', veg: true },
-  // Drinks
-  { cat: 'drinks', emoji: '☕', name: 'Filter Coffee', desc: 'Traditional South Indian filter coffee.', price: '₹60', veg: true },
-  { cat: 'drinks', emoji: '🍵', name: 'Masala Chai', desc: 'Spiced milk tea with ginger & cardamom.', price: '₹50', veg: true },
-  { cat: 'drinks', emoji: '🥤', name: 'Mango Lassi', desc: 'Chilled yoghurt blended with Alphonso mango.', price: '₹90', veg: true },
-  { cat: 'drinks', emoji: '🍋', name: 'Nimbu Pani', desc: 'Fresh lime water with salt and cumin.', price: '₹60', veg: true },
-  { cat: 'drinks', emoji: '🥛', name: 'Buttermilk', desc: 'Chilled salted buttermilk with curry leaves.', price: '₹50', veg: true },
+  // Biryani - Non Veg
+  { cat: 'biryani_nonveg', emoji: '🥚', name: 'Egg Biryani', desc: 'Classic spiced biryani with egg.', price: '₹180', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Fry Biryani', desc: 'Aromatic biryani with spicy chicken fry.', price: '₹220', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Liver Biryani', desc: 'Flavorful biryani with chicken liver masala.', price: '₹240', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Dum Biryani', desc: 'Slow-cooked dum biryani with chicken.', price: '₹230', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Mixed Biryani', desc: 'Hearty mixed-style chicken biryani.', price: '₹240', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍚', name: 'S.P Chicken Pulav', desc: 'Special chicken pulav with signature spices.', price: '₹230', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍛', name: 'Chicken Moghlai', desc: 'Rich Mughlai-style chicken rice preparation.', price: '₹250', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🦐', name: 'Prawns Pulav', desc: 'Fragrant pulav loaded with prawns.', price: '₹260', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🦐', name: 'Prawns Mixed', desc: 'Mixed rice dish with prawns and spices.', price: '₹260', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Joint Pulav', desc: 'Pulav with juicy chicken joint cuts.', price: '₹280', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Wings Pulav', desc: 'Spicy wings pulav cooked in aromatic rice.', price: '₹280', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Lollipop Biryani', desc: 'Biryani topped with crispy chicken lollipops.', price: '₹280', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍖', name: 'All Mixed Biryani', desc: 'Loaded mixed biryani for a full feast.', price: '₹320', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍖', name: 'Mutton Fry Biryani', desc: 'Spiced mutton fry layered with biryani rice.', price: '₹340', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍖', name: 'S.P Mutton Pulav', desc: 'Special mutton pulav with house masala.', price: '₹350', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍖', name: 'Mutton Dum Biryani', desc: 'Traditional dum biryani with tender mutton.', price: '₹400', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍗', name: 'Gongura Chicken Biryani', desc: 'Tangy gongura chicken biryani.', price: '₹260', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍗', name: 'Ulavacharu Chicken Biryani', desc: 'Chicken biryani infused with ulavacharu flavor.', price: '₹260', veg: false },
+  { cat: 'biryani_nonveg', emoji: '🍖', name: 'Gongura Mutton Biryani', desc: 'Mutton biryani with signature gongura tang.', price: '₹380', veg: false },
+
+  // Biryani - Veg
+  { cat: 'biryani_veg', emoji: '🥕', name: 'Veg Biryani', desc: 'Aromatic veg biryani with mixed vegetables.', price: '₹170', veg: true },
+  { cat: 'biryani_veg', emoji: '🥕', name: 'S.P Veg Biryani', desc: 'Special veg biryani with house spices.', price: '₹220', veg: true },
+  { cat: 'biryani_veg', emoji: '🥜', name: 'Kaju Biryani', desc: 'Rich biryani prepared with roasted kaju.', price: '₹250', veg: true },
+  { cat: 'biryani_veg', emoji: '🍄', name: 'Mushroom Biryani', desc: 'Spiced dum biryani with mushrooms.', price: '₹220', veg: true },
+  { cat: 'biryani_veg', emoji: '🧀', name: 'Paneer Biryani', desc: 'Paneer cubes tossed in aromatic biryani masala.', price: '₹220', veg: true },
+  { cat: 'biryani_veg', emoji: '🌽', name: 'Babycorn Biryani', desc: 'Flavorful biryani with baby corn.', price: '₹220', veg: true },
+  { cat: 'biryani_veg', emoji: '🥦', name: 'Veg Mixed Biryani', desc: 'Loaded mixed vegetable biryani.', price: '₹250', veg: true },
+
+  // Fried Rice - Veg
+  { cat: 'fried_rice_veg', emoji: '🍚', name: 'Jeera Rice', desc: 'Simple and fragrant jeera rice.', price: '₹130', veg: true },
+  { cat: 'fried_rice_veg', emoji: '🥕', name: 'Veg Fried Rice', desc: 'Wok-tossed rice with fresh vegetables.', price: '₹120', veg: true },
+  { cat: 'fried_rice_veg', emoji: '🥜', name: 'Kaju Fried Rice', desc: 'Fried rice with rich kaju crunch.', price: '₹250', veg: true },
+  { cat: 'fried_rice_veg', emoji: '🥦', name: 'Veg Mixed Fried Rice', desc: 'Mixed vegetable fried rice in Indo-Chinese style.', price: '₹250', veg: true },
+
+  // Fried Rice - Non Veg
+  { cat: 'fried_rice_nonveg', emoji: '🥚', name: 'Egg Fried Rice', desc: 'Fried rice tossed with egg and spices.', price: '₹140', veg: false },
+  { cat: 'fried_rice_nonveg', emoji: '🍗', name: 'Chicken Fried Rice', desc: 'Wok-tossed chicken fried rice.', price: '₹220', veg: false },
+  { cat: 'fried_rice_nonveg', emoji: '🦐', name: 'Prawns Fried Rice', desc: 'Seafood-style fried rice with prawns.', price: '₹260', veg: false },
+  { cat: 'fried_rice_nonveg', emoji: '🍖', name: 'Mixed Fried Rice', desc: 'Mixed non-veg fried rice platter.', price: '₹320', veg: false },
+  { cat: 'fried_rice_nonveg', emoji: '🍖', name: 'Mutton Fried Rice', desc: 'Spiced mutton fried rice.', price: '₹350', veg: false },
+
+  // Curries - Non Veg
+  { cat: 'curries_nonveg', emoji: '🥚', name: 'Egg Curry', desc: 'Home-style egg curry.', price: '₹120', veg: false },
+  { cat: 'curries_nonveg', emoji: '🍗', name: 'Chicken Curry', desc: 'Classic spicy chicken curry.', price: '₹200', veg: false },
+  { cat: 'curries_nonveg', emoji: '🍗', name: 'Chicken Mughlai', desc: 'Rich and creamy Mughlai chicken curry.', price: '₹240', veg: false },
+  { cat: 'curries_nonveg', emoji: '🦐', name: 'Prawns Curry', desc: 'Prawns cooked in spiced curry gravy.', price: '₹260', veg: false },
+  { cat: 'curries_nonveg', emoji: '🍗', name: 'Butter Chicken', desc: 'Creamy tomato butter chicken.', price: '₹240', veg: false },
+  { cat: 'curries_nonveg', emoji: '🍗', name: 'Chicken Tikka Masala', desc: 'Smoky chicken tikka in masala gravy.', price: '₹250', veg: false },
+  { cat: 'curries_nonveg', emoji: '🍖', name: 'Mutton Curry', desc: 'Traditional mutton curry with bold spices.', price: '₹350', veg: false },
+
+  // Curries - Veg
+  { cat: 'curries_veg', emoji: '🥬', name: 'Palak Dal', desc: 'Dal cooked with fresh spinach.', price: '₹120', veg: true },
+  { cat: 'curries_veg', emoji: '🍅', name: 'Tomato Curry', desc: 'Tangy and mildly spiced tomato curry.', price: '₹100', veg: true },
+  { cat: 'curries_veg', emoji: '🌿', name: 'Green Masala', desc: 'Herb-forward green masala curry.', price: '₹150', veg: true },
+  { cat: 'curries_veg', emoji: '🥦', name: 'Veg Mixed', desc: 'Mixed vegetable curry in house masala.', price: '₹150', veg: true },
+  { cat: 'curries_veg', emoji: '🧀', name: 'Palak Paneer', desc: 'Paneer in creamy spinach gravy.', price: '₹220', veg: true },
+  { cat: 'curries_veg', emoji: '🧀', name: 'Paneer Butter Masala', desc: 'Paneer in rich butter masala gravy.', price: '₹200', veg: true },
+  { cat: 'curries_veg', emoji: '🍄', name: 'Mushroom Curry', desc: 'Mushroom curry with aromatic spices.', price: '₹200', veg: true },
+
+  // Snacks
+  { cat: 'snacks', emoji: '🥚', name: 'Egg Manchurian', desc: 'Crispy egg manchurian in spicy sauce.', price: '₹180', veg: false },
+  { cat: 'snacks', emoji: '🍗', name: 'Chilli Chicken', desc: 'Street-style chilli chicken.', price: '₹200', veg: false },
+  { cat: 'snacks', emoji: '🍗', name: 'Chicken 65', desc: 'Crispy and spicy Chicken 65.', price: '₹200', veg: false },
+  { cat: 'snacks', emoji: '🍗', name: 'Chicken Wings', desc: 'Fried chicken wings with spices.', price: '₹200', veg: false },
+  { cat: 'snacks', emoji: '🍗', name: 'Chicken Lollipop', desc: 'Crunchy chicken lollipop starter.', price: '₹200', veg: false },
+  { cat: 'snacks', emoji: '🦐', name: 'Prawns Fry', desc: 'Spicy prawns fry.', price: '₹260', veg: false },
+  { cat: 'snacks', emoji: '🍗', name: 'Pepper Chicken', desc: 'Pepper-forward chicken dry roast.', price: '₹270', veg: false },
 ];
 
 const TABS = [
   { key: 'all', label: 'All' },
-  { key: 'starters', label: 'Starters' },
-  { key: 'tiffin', label: 'Tiffin' },
-  { key: 'main', label: 'Main Course' },
-  { key: 'rice', label: 'Rice & Biryani' },
-  { key: 'desserts', label: 'Desserts' },
-  { key: 'drinks', label: 'Drinks' },
+  { key: 'biryani_nonveg', label: 'Biryani (Non-Veg)' },
+  { key: 'biryani_veg', label: 'Biryani (Veg)' },
+  { key: 'fried_rice_veg', label: 'Fried Rice (Veg)' },
+  { key: 'fried_rice_nonveg', label: 'Fried Rice (Non-Veg)' },
+  { key: 'curries_nonveg', label: 'Curries (Non-Veg)' },
+  { key: 'curries_veg', label: 'Curries (Veg)' },
+  { key: 'snacks', label: 'Snacks' },
 ];
 
 export default function MenuPage() {

@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const values = [
   { icon: '🌿', title: 'Fresh Ingredients', desc: 'We source vegetables, spices and meats fresh daily from trusted local farmers and suppliers.' },
   { icon: '🤝', title: 'Genuine Hospitality', desc: 'Every guest is treated like family. We believe a warm welcome is as important as great food.' },
-  { icon: '📜', title: 'Authentic Recipes', desc: 'Our kitchen follows traditional Andhra cooking techniques — no shortcuts, no compromises.' },
-  { icon: '♻️', title: 'Sustainability', desc: 'We minimise waste, use eco-friendly packaging and support local communities wherever possible.' },
+  { icon: '🍽️', title: 'Our Specialties', desc: 'Each dish is thoughtfully crafted with quality ingredients and authentic flavors that bring out the best in every cuisine we serve.' },
+  { icon: '🚗', title: 'Amenities', desc: 'We offer Drive-Through and High Chair availability, ensuring every visit is as comfortable as it is enjoyable.' },
 ];
 
 const team = [
@@ -31,25 +32,31 @@ export default function AboutPage() {
       {/* Page Header */}
       <div className="pt-32 pb-16 text-center" style={{ background: 'linear-gradient(135deg,#1a1a1a 60%,#b5451b)' }}>
         <h1 className="font-serif text-5xl text-white mb-2">About Us</h1>
-        <p className="text-white/70 text-lg">Our story, our passion, our heritage</p>
+        <p className="text-white/70 text-lg">SSR Restaurant in Kaikalur — where tradition meets innovation</p>
       </div>
 
       {/* Our Story */}
       <section className="py-20 max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
-          <div
-            className="rounded-xl h-80 flex items-center justify-center text-8xl shadow-xl"
-            style={{ background: 'linear-gradient(135deg,#b5451b,#f4a229)' }}
-          >
-            🏡
+          <div className="relative rounded-xl h-80 overflow-hidden shadow-xl">
+            <Image
+              src="/gallery/25.webp"
+              alt="SSR Restaurant"
+              fill
+              className="object-cover"
+              sizes="(max-width:768px) 100vw, 50vw"
+            />
           </div>
           <div>
-            <h2 className="left-title">Our Story</h2>
+            <h2 className="left-title">SSR Restaurant in Kaikalur</h2>
             <p className="text-[#555] mb-4">
-              SSR Restaurant was founded in 2010 with a simple yet powerful mission — to bring the bold, fiery and soulful flavours of Andhra Pradesh to every plate we serve. What began as a small family kitchen has grown into a beloved dining destination, cherished by locals and visitors alike.
+              Located in the vibrant heart of Kaikalur, SSR Restaurant is a cherished culinary haven where tradition meets innovation. Known for its commitment to quality ingredients, delightful flavors, and exceptional service, SSR Restaurant invites you to savor a dining experience like no other.
+            </p>
+            <p className="text-[#555] mb-4">
+              The restaurant&apos;s interior is elegantly designed to provide a cozy yet refined ambiance, with warm lighting and tasteful decor that make every meal feel special. Whether you&apos;re here for a quick bite or a leisurely gathering, the inviting atmosphere at SSR Restaurant ensures a memorable dining experience.
             </p>
             <p className="text-[#555]">
-              The name <strong>SSR</strong> honours our founder&apos;s grandmother, <em>Smt. Saraswathi Reddy</em>, whose age-old recipes form the very heart of our menu. Every dish we serve is a tribute to her legacy.
+              For those who appreciate quality food, a warm atmosphere, and attentive service, SSR Restaurant in Kaikalur is a must-visit destination. With its extensive menu, accessible location, and dedication to customer satisfaction, SSR Restaurant promises an unforgettable dining experience.
             </p>
           </div>
         </div>

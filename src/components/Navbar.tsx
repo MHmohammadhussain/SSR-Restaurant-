@@ -74,6 +74,7 @@ export default function Navbar() {
           <Link
             key={href}
             href={href}
+            onClick={() => setOpen(false)}
             className={`block px-6 py-4 border-b border-[#333] text-sm font-bold transition-colors ${
               pathname === href ? 'text-[#f4a229]' : 'text-[#e0e0e0] hover:text-[#f4a229]'
             }`}

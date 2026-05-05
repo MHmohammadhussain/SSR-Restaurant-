@@ -55,9 +55,7 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4">Opening Hours</h4>
             <ul className="space-y-2 text-sm">
-              <li>Mon – Thu: 11 AM – 10 PM</li>
-              <li>Fri – Sat: 11 AM – 11 PM</li>
-              <li>Sunday: 12 PM – 10 PM</li>
+              <li>Daily: 11 AM – 3:30 PM, 6 – 10:30 PM</li>
             </ul>
           </div>
 
@@ -65,8 +63,8 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li>📍 123 Spice Lane, Hyderabad</li>
-              <li>📞 +91 98765 43210</li>
+              <li>📍 Taluka center, MRO OFFICE, Opposite SSR FAMILY RESTAURANT, KAIKALUR, Andhra Pradesh 521333</li>
+              <li>📞 +91 9491437799</li>
               <li>✉️ hello@ssrrestaurant.com</li>
             </ul>
           </div>
