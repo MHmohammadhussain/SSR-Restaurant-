@@ -63,9 +63,9 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li>📍 Taluka center, MRO OFFICE, Opposite SSR FAMILY RESTAURANT, KAIKALUR, Andhra Pradesh 521333</li>
+              <li>📍 Opposite MRO Office, Beside Venkataramana Theatre, Main Road, Kaikalur, Andhra Pradesh, 521333</li>
               <li>📞 +91 9491437799</li>
-              <li>✉️ hello@ssrrestaurant.com</li>
+              <li>✉️ ssrrestaurant007@gmail.com</li>
             </ul>
           </div>
         </div>

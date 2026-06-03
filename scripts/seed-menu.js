@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { loadEnvConfig } = require('@next/env');
 const mongoose = require('mongoose');
 
@@ -13,6 +14,7 @@ const menuItemSchema = new mongoose.Schema(
   {
     emoji: { type: String, required: true },
     name: { type: String, required: true },
+    image: { type: String, default: '' },
     description: { type: String, required: true },
     price: { type: Number, required: true },
     category: {
@@ -37,10 +39,10 @@ const menuItemSchema = new mongoose.Schema(
 const MenuItem = mongoose.models.MenuItem || mongoose.model('MenuItem', menuItemSchema);
 
 const MENU = [
-  { category: 'biryani_nonveg', emoji: '🥚', name: 'Egg Biryani', description: 'Classic spiced biryani with egg.', price: 180, isVegetarian: false },
-  { category: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Fry Biryani', description: 'Aromatic biryani with spicy chicken fry.', price: 220, isVegetarian: false },
-  { category: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Liver Biryani', description: 'Flavorful biryani with chicken liver masala.', price: 240, isVegetarian: false },
-  { category: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Dum Biryani', description: 'Slow-cooked dum biryani with chicken.', price: 230, isVegetarian: false },
+  { category: 'biryani_nonveg', emoji: '🥚', name: 'Egg Biryani', image: '/images/menu/egg-biryani.jpg', description: 'Classic spiced biryani with egg.', price: 180, isVegetarian: false },
+  { category: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Fry Biryani', image: '/images/menu/chicken-fry-biryani.jpg', description: 'Aromatic biryani with spicy chicken fry.', price: 220, isVegetarian: false },
+  { category: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Liver Biryani', image: '/images/menu/chicken-liver-biryani.jpg', description: 'Flavorful biryani with chicken liver masala.', price: 240, isVegetarian: false },
+  { category: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Dum Biryani', image: '/images/menu/chicken-dum-biryani.png', description: 'Slow-cooked dum biryani with chicken.', price: 230, isVegetarian: false },
   { category: 'biryani_nonveg', emoji: '🍗', name: 'Chicken Mixed Biryani', description: 'Hearty mixed-style chicken biryani.', price: 240, isVegetarian: false },
   { category: 'biryani_nonveg', emoji: '🍚', name: 'S.P Chicken Pulav', description: 'Special chicken pulav with signature spices.', price: 230, isVegetarian: false },
   { category: 'biryani_nonveg', emoji: '🍛', name: 'Chicken Moghlai', description: 'Rich Mughlai-style chicken rice preparation.', price: 250, isVegetarian: false },

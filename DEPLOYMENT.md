@@ -53,6 +53,8 @@ ADMIN_EMAIL=admin@ssrrestaurant.com
 ADMIN_PASSWORD=your-admin-password
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+GOOGLE_CLIENT_ID=your-google-oauth-client-id
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-oauth-client-id
 ```
 
 ## 🌐 Deployment with Vercel

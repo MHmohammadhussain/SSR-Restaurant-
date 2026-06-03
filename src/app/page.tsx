@@ -1,19 +1,15 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
+import { absoluteUrl } from '@/lib/seo';
 
 const dishes = [
-  { emoji: '🍗', name: 'Chicken Dum Biryani', desc: 'Slow-cooked dum biryani packed with bold spice.', price: '₹230', bg: 'linear-gradient(135deg,#b5451b,#f4a229)' },
-  { emoji: '🍖', name: 'Mutton Dum Biryani', desc: 'Tender mutton layered in aromatic dum rice.', price: '₹400', bg: 'linear-gradient(135deg,#8b2252,#e87bb0)' },
-  { emoji: '🦐', name: 'Prawns Pulav', desc: 'Fragrant prawn pulav with coastal-style masala.', price: '₹260', bg: 'linear-gradient(135deg,#1a6e7a,#5bc8d5)' },
-  { emoji: '🧀', name: 'Paneer Biryani', desc: 'Paneer cubes cooked in rich biryani masala.', price: '₹220', bg: 'linear-gradient(135deg,#2d7a35,#a4d86e)' },
-  { emoji: '🍗', name: 'Butter Chicken', desc: 'Creamy tomato gravy with juicy chicken.', price: '₹240', bg: 'linear-gradient(135deg,#c07530,#f9d05e)' },
-  { emoji: '🍗', name: 'Chicken 65', desc: 'Crispy, spicy and always crowd-favorite.', price: '₹200', bg: 'linear-gradient(135deg,#7a2a0d,#d96f3f)' },
-];
-
-const features = [
-  { icon: '🌶️', title: 'Authentic Flavours', desc: 'Every dish is crafted using traditional recipes, hand-ground spices and fresh local produce.' },
-  { icon: '👨‍🍳', title: 'Expert Chefs', desc: 'Our chefs hail from Andhra Pradesh and bring decades of culinary heritage to every plate.' },
-  { icon: '🏠', title: 'Warm Ambience', desc: 'Dine in a cozy, home-like setting inspired by traditional Telugu village hospitality.' },
-  { icon: '🚚', title: 'Fast Delivery', desc: 'Enjoy the same restaurant-quality taste at home with our swift delivery service.' },
+  { emoji: '🍗', name: 'Chicken Dum Biryani', desc: 'Slow-cooked dum biryani packed with bold spice.', price: '₹230', bg: 'linear-gradient(135deg,#b5451b,#f4a229)', image: '/images/menu/chicken-dum-biryani.jpg' },
+  { emoji: '🍖', name: 'Mutton Dum Biryani', desc: 'Tender mutton layered in aromatic dum rice.', price: '₹400', bg: 'linear-gradient(135deg,#8b2252,#e87bb0)', image: '/images/menu/mutton-dum-biryani.jpg' },
+  { emoji: '🦐', name: 'Prawns Pulav', desc: 'Fragrant prawn pulav with coastal-style masala.', price: '₹260', bg: 'linear-gradient(135deg,#1a6e7a,#5bc8d5)', image: '/images/menu/prawns-pulav.jpg' },
+  { emoji: '🧀', name: 'Paneer Biryani', desc: 'Paneer cubes cooked in rich biryani masala.', price: '₹220', bg: 'linear-gradient(135deg,#2d7a35,#a4d86e)', image: '/images/menu/paneer-biryani.jpg' },
+  { emoji: '🍗', name: 'Butter Chicken', desc: 'Creamy tomato gravy with juicy chicken.', price: '₹240', bg: 'linear-gradient(135deg,#c07530,#f9d05e)', image: '/images/menu/butter-chicken.jpg' },
+  { emoji: '🍗', name: 'Chicken 65', desc: 'Crispy, spicy and always crowd-favorite.', price: '₹200', bg: 'linear-gradient(135deg,#7a2a0d,#d96f3f)', image: '/images/menu/chicken-65.jpg' },
 ];
 
 const reviews = [
@@ -22,9 +18,79 @@ const reviews = [
   { stars: 4, text: '"Loved the Paneer Biryani and Veg Fried Rice. Delivery was quick and food arrived hot."', name: 'Aditi Sharma' },
 ];
 
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: 'SSR Restaurant',
+  url: absoluteUrl('/'),
+  image: absoluteUrl('/images/home/designer-6.png'),
+  telephone: '+91 9491437799',
+  priceRange: '₹₹',
+  servesCuisine: ['Andhra', 'South Indian', 'Indian'],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Opposite MRO Office, Beside Venkataramana Theatre, Main Road',
+    addressLocality: 'Kaikalur',
+    addressRegion: 'Andhra Pradesh',
+    postalCode: '521333',
+    addressCountry: 'IN',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 16.5538119,
+    longitude: 81.2157792,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '11:00',
+      closes: '15:30',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '18:00',
+      closes: '22:30',
+    },
+  ],
+  menu: absoluteUrl('/menu'),
+  acceptsReservations: true,
+};
+
+export const metadata: Metadata = {
+  title: { absolute: 'SSR Restaurant — Authentic Andhra Cuisine' },
+  description: 'Experience the bold, fiery flavours of authentic South Indian Andhra cuisine at SSR Restaurant, Hyderabad.',
+  openGraph: {
+    type: 'website',
+    title: 'SSR Restaurant — Authentic Andhra Cuisine',
+    description: 'Experience the bold, fiery flavours of authentic South Indian Andhra cuisine at SSR Restaurant, Hyderabad.',
+    url: absoluteUrl('/'),
+    images: [
+      {
+        url: absoluteUrl('/images/home/designer-6.png'),
+        width: 1600,
+        height: 1240,
+        alt: 'SSR Restaurant signature dishes and ambience',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SSR Restaurant — Authentic Andhra Cuisine',
+    description: 'Experience the bold, fiery flavours of authentic South Indian Andhra cuisine at SSR Restaurant, Hyderabad.',
+    images: [absoluteUrl('/images/home/designer-6.png')],
+  },
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantSchema) }}
+      />
+
       {/* ── Hero ── */}
       <section
         className="relative min-h-screen flex items-center"
@@ -51,15 +117,18 @@ export default function Home() {
       </section>
 
       {/* ── Features ── */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((f) => (
-            <div key={f.title} className="text-center p-10 rounded-xl bg-[#fdf6ec] shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all">
-              <div className="text-4xl mb-4">{f.icon}</div>
-              <h3 className="font-serif text-lg mb-2">{f.title}</h3>
-              <p className="text-sm text-[#777]">{f.desc}</p>
-            </div>
-          ))}
+      <section className="py-14 bg-[#f4f4f4]">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="rounded-2xl overflow-hidden shadow-md border border-black/5">
+            <Image
+              src="/images/home/designer-6.png"
+              alt="SSR highlights: Authentic Flavours, Expert Chefs, Warm Ambience, and Fast Delivery"
+              width={1600}
+              height={1240}
+              className="w-full h-auto block"
+              sizes="(max-width: 1024px) 100vw, 1200px"
+            />
+          </div>
         </div>
       </section>
 
@@ -70,7 +139,13 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {dishes.map((d) => (
             <div key={d.name} className="rounded-xl overflow-hidden bg-white shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all">
-              <div className="h-40 flex items-center justify-center text-6xl" style={{ background: d.bg }}>{d.emoji}</div>
+              <div className="h-40 relative" style={!d.image ? { background: d.bg } : {}}>
+                {d.image ? (
+                  <Image src={d.image} alt={d.name} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
+                ) : (
+                  <div className="h-full flex items-center justify-center text-6xl">{d.emoji}</div>
+                )}
+              </div>
               <div className="p-5">
                 <h3 className="font-serif text-lg mb-1">{d.name}</h3>
                 <p className="text-sm text-[#777]">{d.desc}</p>

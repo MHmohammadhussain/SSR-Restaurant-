@@ -96,8 +96,8 @@ export default function ReservationsPage() {
             {submitted ? (
               <div className="text-center py-8">
                 <div className="text-5xl mb-4">🎉</div>
-                <h4 className="font-serif text-xl mb-2">Reservation Confirmed!</h4>
-                <p className="text-[#555] text-sm">We&apos;ll send a confirmation to your email shortly.</p>
+                <h4 className="font-serif text-xl mb-2">Reservation Request Received!</h4>
+                <p className="text-[#555] text-sm">Your booking is pending approval from admin. We&apos;ll send a confirmation email once it is approved.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate>

@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed:menu": "node scripts/seed-menu.js"
+    "seed:menu": "node scripts/seed-menu.js",
+    "gen:menu-images": "node scripts/generate-menu-images-openai.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "google-auth-library": "^10.6.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.6.1",
     "next": "16.2.4",

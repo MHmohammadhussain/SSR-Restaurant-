@@ -62,9 +62,9 @@ export default function ContactPage() {
           <div>
             <h3 className="font-serif text-2xl mb-6">Get in Touch</h3>
             {[
-              { icon: '📍', label: 'Address', text: 'Taluka center, MRO OFFICE, Opposite SSR FAMILY RESTAURANT,\nKAIKALUR, Andhra Pradesh 521333' },
+              { icon: '📍', label: 'Address', text: 'Opposite MRO Office, Beside Venkataramana Theatre, Main Road,\nKaikalur, Andhra Pradesh, 521333' },
               { icon: '📞', label: 'Phone', text: '+91 9491437799' },
-              { icon: '✉️', label: 'Email', text: 'hello@ssrrestaurant.com\nreservations@ssrrestaurant.com' },
+              { icon: '✉️', label: 'Email', text: 'ssrrestaurant007@gmail.com' },
               { icon: '🕐', label: 'Hours', text: 'Daily: 11 AM – 3:30 PM, 6 – 10:30 PM' },
             ].map((d) => (
               <div key={d.label} className="flex gap-4 mb-6">
@@ -81,13 +81,24 @@ export default function ContactPage() {
               </div>
             ))}
 
-            {/* Map placeholder */}
-            <div
-              className="rounded-xl h-64 flex items-center justify-center text-7xl mt-6 shadow-lg"
-              style={{ background: 'linear-gradient(135deg,#2d7a35,#a4d86e)' }}
-            >
-              🗺️
+            <div className="rounded-xl overflow-hidden mt-6 shadow-lg border border-black/5">
+              <iframe
+                title="SSR Restaurant Location"
+                src="https://www.google.com/maps?q=16.5538119,81.2157792&z=17&output=embed"
+                className="w-full h-64"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
+            <a
+              href="https://maps.app.goo.gl/RC1JVqXf2phA8GSZ6"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block mt-4 px-5 py-3 rounded-full font-semibold text-white transition-colors"
+              style={{ background: '#2d7a35' }}
+            >
+              Get Directions on Google Maps
+            </a>
           </div>
 
           {/* Form */}

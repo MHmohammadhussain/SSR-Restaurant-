@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const links = [
   { href: '/',             label: 'Home' },
@@ -17,9 +17,29 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!navRef.current?.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+    };
+  }, [open]);
 
   return (
     <nav
+      ref={navRef}
       className="fixed top-0 left-0 w-full z-50 backdrop-blur-md"
       style={{ background: 'rgba(26,26,26,0.95)' }}
     >
@@ -29,29 +49,37 @@ export default function Navbar() {
           SSR <span style={{ color: '#b5451b' }}>Restaurant</span>
         </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex gap-7 list-none">
-          {links.map(({ href, label }) => {
-            const active = pathname === href;
-            return (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={`text-sm font-bold tracking-wide transition-colors duration-200 relative group ${
-                    active ? 'text-[#f4a229]' : 'text-[#e0e0e0] hover:text-[#f4a229]'
-                  }`}
-                >
-                  {label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-0.5 bg-[#f4a229] transition-all duration-200 ${
-                      active ? 'w-full' : 'w-0 group-hover:w-full'
+        <div className="hidden md:flex items-center gap-6">
+          {/* Desktop links */}
+          <ul className="flex gap-7 list-none">
+            {links.map(({ href, label }) => {
+              const active = pathname === href;
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className={`text-sm font-bold tracking-wide transition-colors duration-200 relative group ${
+                      active ? 'text-[#f4a229]' : 'text-[#e0e0e0] hover:text-[#f4a229]'
                     }`}
-                  />
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+                  >
+                    {label}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-0.5 bg-[#f4a229] transition-all duration-200 ${
+                        active ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}
+                    />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <Link
+            href="/admin"
+            className="rounded-full border border-[#f4a229] px-4 py-2 text-sm font-bold text-[#f4a229] transition-colors hover:bg-[#f4a229] hover:text-[#1a1a1a]"
+          >
+            Login
+          </Link>
+        </div>
 
         {/* Mobile toggle */}
         <button
@@ -82,6 +110,15 @@ export default function Navbar() {
             {label}
           </Link>
         ))}
+        <div className="px-6 py-4">
+          <Link
+            href="/admin"
+            onClick={() => setOpen(false)}
+            className="block rounded-full border border-[#f4a229] px-4 py-3 text-center text-sm font-bold text-[#f4a229] transition-colors hover:bg-[#f4a229] hover:text-[#1a1a1a]"
+          >
+            Login
+          </Link>
+        </div>
       </div>
     </nav>
   );

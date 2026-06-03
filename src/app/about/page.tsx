@@ -1,17 +1,34 @@
-import Link from 'next/link';
+import type { Metadata } from 'next';
 import Image from 'next/image';
-
-const values = [
-  { icon: '🌿', title: 'Fresh Ingredients', desc: 'We source vegetables, spices and meats fresh daily from trusted local farmers and suppliers.' },
-  { icon: '🤝', title: 'Genuine Hospitality', desc: 'Every guest is treated like family. We believe a warm welcome is as important as great food.' },
-  { icon: '🍽️', title: 'Our Specialties', desc: 'Each dish is thoughtfully crafted with quality ingredients and authentic flavors that bring out the best in every cuisine we serve.' },
-  { icon: '🚗', title: 'Amenities', desc: 'We offer Drive-Through and High Chair availability, ensuring every visit is as comfortable as it is enjoyable.' },
-];
+import { absoluteUrl } from '@/lib/seo';
 
 const team = [
-  { emoji: '👨‍🍳', name: 'Ravi Kumar', role: 'Head Chef', desc: '25 years of Andhra culinary expertise. Trained in Vijayawada and Hyderabad\'s top kitchens.', bg: 'linear-gradient(135deg,#b5451b,#f4a229)' },
-  { emoji: '👩‍🍳', name: 'Lakshmi Devi', role: 'Sous Chef', desc: 'Specialist in vegetarian Andhra dishes and traditional tiffin items like idly, dosa and uttapam.', bg: 'linear-gradient(135deg,#2d7a35,#a4d86e)' },
-  { emoji: '👨‍💼', name: 'Suresh Naidu', role: 'Restaurant Manager', desc: 'Ensures every guest experience is warm, memorable and worthy of a second visit.', bg: 'linear-gradient(135deg,#1a6e7a,#5bc8d5)' },
+  {
+    emoji: '👨‍💼',
+    name: 'SAI Naidu',
+    role: 'Owner & Co-Founder',
+    desc: 'Leads the vision of SSR Restaurant with a focus on authentic taste, guest experience, and long-term excellence.',
+    bg: 'linear-gradient(135deg,#1a6e7a,#5bc8d5)',
+    image: '/images/about/sai-naidu.jpeg',
+  },
+  {
+    emoji: '👨‍💼',
+    name: 'Shivaji Naidu',
+    role: 'Restaurant Manager',
+    desc: 'Ensures smooth day-to-day operations and a warm, reliable dining experience for every guest.',
+    bg: 'linear-gradient(135deg,#2d7a35,#a4d86e)',
+    image: '/gallery/shivaji-new.jpeg',
+    imageFit: 'cover',
+    imagePosition: 'center 42%',
+  },
+  {
+    emoji: '👨‍🍳',
+    name: 'Sadik Hussain',
+    role: 'Legendary Supporter',
+    desc: 'A trusted supporter of the restaurant who helps keep the team motivated and the experience exceptional.',
+    bg: 'linear-gradient(135deg,#b5451b,#f4a229)',
+    image: '/images/about/sadik-hussain.png',
+  },
 ];
 
 const stats = [
@@ -21,9 +38,29 @@ const stats = [
   { num: '4.8★', label: 'Average Rating' },
 ];
 
-export const metadata = {
-  title: 'About Us — SSR Restaurant',
+export const metadata: Metadata = {
+  title: 'About Us',
   description: 'Learn about SSR Restaurant\'s story, heritage and passion for authentic Andhra cuisine.',
+  openGraph: {
+    type: 'website',
+    title: 'About Us — SSR Restaurant',
+    description: 'Learn about SSR Restaurant\'s story, heritage and passion for authentic Andhra cuisine.',
+    url: absoluteUrl('/about'),
+    images: [
+      {
+        url: absoluteUrl('/images/about/designer-7.png'),
+        width: 1600,
+        height: 1120,
+        alt: 'SSR Restaurant about and team highlights',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Us — SSR Restaurant',
+    description: 'Learn about SSR Restaurant\'s story, heritage and passion for authentic Andhra cuisine.',
+    images: [absoluteUrl('/images/about/designer-7.png')],
+  },
 };
 
 export default function AboutPage() {
@@ -63,18 +100,17 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-[#f4f4f4]">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="section-title">Our Core Values</h2>
-          <p className="section-subtitle">The principles that guide every meal we prepare</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((v) => (
-              <div key={v.title} className="text-center p-8 rounded-xl bg-[#fdf6ec] shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all">
-                <div className="text-4xl mb-3">{v.icon}</div>
-                <h3 className="font-serif text-lg mb-2">{v.title}</h3>
-                <p className="text-sm text-[#777]">{v.desc}</p>
-              </div>
-            ))}
+          <div className="rounded-2xl overflow-hidden shadow-md border border-black/5">
+            <Image
+              src="/images/about/designer-7.png"
+              alt="SSR core values: Fresh Ingredients, Genuine Hospitality, Our Specialties, and Amenities"
+              width={1600}
+              height={1120}
+              className="w-full h-auto block"
+              sizes="(max-width: 1024px) 100vw, 1200px"
+            />
           </div>
         </div>
       </section>
@@ -86,12 +122,25 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {team.map((m) => (
             <div key={m.name} className="text-center bg-white rounded-xl p-10 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all">
-              <div
-                className="w-24 h-24 rounded-full flex items-center justify-center text-4xl mx-auto mb-5"
-                style={{ background: m.bg }}
-              >
-                {m.emoji}
-              </div>
+              {m.image ? (
+                <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-5 ring-2 ring-white shadow-md">
+                  <Image
+                    src={m.image}
+                    alt={m.name}
+                    fill
+                    className={m.imageFit === 'contain' ? 'object-contain bg-black' : 'object-cover'}
+                    style={m.imagePosition ? { objectPosition: m.imagePosition } : undefined}
+                    sizes="96px"
+                  />
+                </div>
+              ) : (
+                <div
+                  className="w-24 h-24 rounded-full flex items-center justify-center text-4xl mx-auto mb-5"
+                  style={{ background: m.bg }}
+                >
+                  {m.emoji}
+                </div>
+              )}
               <h3 className="font-serif text-xl mb-1">{m.name}</h3>
               <span className="text-xs font-bold uppercase tracking-wider block mb-3" style={{ color: '#b5451b' }}>{m.role}</span>
               <p className="text-sm text-[#777]">{m.desc}</p>

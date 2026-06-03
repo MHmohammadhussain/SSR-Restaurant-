@@ -1,7 +1,8 @@
 import { connectDB } from '@/lib/db';
 import Reservation from '@/lib/models/Reservation';
-import { sendReservationConfirmation } from '@/lib/email';
+import { sendRestaurantReservationNotification } from '@/lib/email';
 import { NextRequest, NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,19 +29,30 @@ export async function POST(request: NextRequest) {
       guests: Number(guests),
       occasion: occasion || '',
       specialRequests: specialRequests || '',
-      status: 'confirmed',
+      status: 'pending',
     });
 
     await reservation.save();
 
-    // Send confirmation email
-    await sendReservationConfirmation(
-      email,
-      `${firstName} ${lastName}`,
-      new Date(date).toLocaleDateString(),
-      time,
-      Number(guests)
-    );
+    // Keep reservation creation successful even if notification fails.
+    const notificationResult = await Promise.allSettled([
+      sendRestaurantReservationNotification({
+        reservationId: reservation._id.toString(),
+        firstName,
+        lastName,
+        email,
+        phone,
+        date: new Date(date).toLocaleDateString(),
+        time,
+        guests: Number(guests),
+        occasion: occasion || '',
+        specialRequests: specialRequests || '',
+      }),
+    ]);
+
+    if (notificationResult[0].status === 'rejected') {
+      console.error('Reservation notification failed after save:', notificationResult[0].reason);
+    }
 
     return NextResponse.json(
       { message: 'Reservation created successfully', reservationId: reservation._id },
@@ -56,7 +68,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     await connectDB();
 
@@ -66,6 +78,36 @@ export async function GET(request: NextRequest) {
     console.error('Get reservations error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch reservations' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  try {
+    await connectDB();
+    const body = await request.json();
+    const { id, status } = body;
+
+    const allowedStatuses = ['pending', 'confirmed', 'cancelled'];
+    if (!id || typeof id !== 'string' || !allowedStatuses.includes(status)) {
+      return NextResponse.json({ error: 'Invalid id or status' }, { status: 400 });
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: 'Invalid id format' }, { status: 400 });
+    }
+
+    const updated = await Reservation.findByIdAndUpdate(id, { status }, { new: true });
+    if (!updated) {
+      return NextResponse.json({ error: 'Reservation not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: 'Reservation status updated', reservation: updated });
+  } catch (error) {
+    console.error('Update reservation status error:', error);
+    return NextResponse.json(
+      { error: 'Failed to update reservation status' },
       { status: 500 }
     );
   }

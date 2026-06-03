@@ -1,0 +1,56 @@
+Egg Biryani
+Chicken Fry Biryani
+Chicken Liver Biryani
+Chicken Dum Biryani
+Chicken Mixed Biryani
+S.P Chicken Pulav
+Chicken Moghlai
+Prawns Pulav
+Prawns Mixed
+Chicken Joint Pulav
+Chicken Wings Pulav
+Chicken Lollipop Biryani
+All Mixed Biryani
+Mutton Fry Biryani
+S.P Mutton Pulav
+Mutton Dum Biryani
+Gongura Chicken Biryani
+Ulavacharu Chicken Biryani
+Gongura Mutton Biryani
+Veg Biryani
+S.P Veg Biryani
+Kaju Biryani
+Mushroom Biryani
+Paneer Biryani
+Babycorn Biryani
+Veg Mixed Biryani
+Jeera Rice
+Veg Fried Rice
+Kaju Fried Rice
+Veg Mixed Fried Rice
+Egg Fried Rice
+Chicken Fried Rice
+Prawns Fried Rice
+Mixed Fried Rice
+Mutton Fried Rice
+Egg Curry
+Chicken Curry
+Chicken Mughlai
+Prawns Curry
+Butter Chicken
+Chicken Tikka Masala
+Mutton Curry
+Palak Dal
+Tomato Curry
+Green Masala
+Veg Mixed
+Palak Paneer
+Paneer Butter Masala
+Mushroom Curry
+Egg Manchurian
+Chilli Chicken
+Chicken 65
+Chicken Wings
+Chicken Lollipop
+Prawns Fry
+Pepper Chicken

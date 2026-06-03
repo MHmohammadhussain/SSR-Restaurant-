@@ -14,11 +14,11 @@ html { scroll-behavior: smooth; }
 body {
   background-color: var(--clr-light);
   color: var(--clr-dark);
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: var(--font-lato), Arial, sans-serif;
   line-height: 1.7;
 }
 
-h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; }
+h1,h2,h3,h4 { font-family: var(--font-playfair), Georgia, serif; }
 
 /* Section utilities */
 .section-title {
@@ -84,7 +84,7 @@ h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; }
   border: 1.5px solid #ddd;
   border-radius: 8px;
   font-size: 0.95rem;
-  font-family: 'Lato', Arial, sans-serif;
+  font-family: var(--font-lato), Arial, sans-serif;
   transition: all 0.3s ease;
   background: #fafafa;
   outline: none;

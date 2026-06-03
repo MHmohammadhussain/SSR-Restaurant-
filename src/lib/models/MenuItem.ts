@@ -4,6 +4,7 @@ const menuItemSchema = new mongoose.Schema(
   {
     emoji: { type: String, required: true },
     name: { type: String, required: true },
+    image: { type: String, default: '' },
     description: { type: String, required: true },
     price: { type: Number, required: true },
     category: {

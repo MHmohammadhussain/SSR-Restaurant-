@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
 
-    let query: any = {};
+    const query: { category?: string } = {};
     if (category) {
       query.category = category;
     }
