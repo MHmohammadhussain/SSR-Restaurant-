@@ -1,6 +1,7 @@
 import { connectDB } from '@/lib/db';
 import Reservation from '@/lib/models/Reservation';
 import { sendRestaurantReservationNotification } from '@/lib/email';
+import { sendRestaurantReservationWhatsappNotification } from '@/lib/whatsapp';
 import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 
@@ -48,10 +49,26 @@ export async function POST(request: NextRequest) {
         occasion: occasion || '',
         specialRequests: specialRequests || '',
       }),
+      sendRestaurantReservationWhatsappNotification({
+        reservationId: reservation._id.toString(),
+        firstName,
+        lastName,
+        email,
+        phone,
+        date: new Date(date).toLocaleDateString(),
+        time,
+        guests: Number(guests),
+        occasion: occasion || '',
+        specialRequests: specialRequests || '',
+      }),
     ]);
 
     if (notificationResult[0].status === 'rejected') {
       console.error('Reservation notification failed after save:', notificationResult[0].reason);
+    }
+
+    if (notificationResult[1].status === 'rejected') {
+      console.error('Reservation WhatsApp notification failed after save:', notificationResult[1].reason);
     }
 
     return NextResponse.json(

@@ -1,6 +1,7 @@
 import { connectDB } from '@/lib/db';
 import Order from '@/lib/models/Order';
 import { sendRestaurantOrderNotification } from '@/lib/email';
+import { sendRestaurantOrderWhatsappNotification } from '@/lib/whatsapp';
 import { createPaymentIntent } from '@/lib/stripe';
 import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
@@ -100,10 +101,28 @@ export async function POST(request: NextRequest) {
         orderDescription,
         selectedItems: Array.isArray(selectedItems) ? selectedItems : [],
       }),
+      sendRestaurantOrderWhatsappNotification({
+        orderId: order._id.toString(),
+        customerName: fullName,
+        customerPhone: phone,
+        customerEmail: typeof email === 'string' ? email : '',
+        deliveryAddress,
+        pinCode,
+        amount: estimatedAmount,
+        paymentMethod,
+        preferredTime,
+        specialInstructions,
+        orderDescription,
+        selectedItems: Array.isArray(selectedItems) ? selectedItems : [],
+      }),
     ]);
 
     if (notificationResult[0].status === 'rejected') {
       console.error('Order notification failed after order save:', notificationResult[0].reason);
+    }
+
+    if (notificationResult[1].status === 'rejected') {
+      console.error('Order WhatsApp notification failed after order save:', notificationResult[1].reason);
     }
 
     return NextResponse.json(

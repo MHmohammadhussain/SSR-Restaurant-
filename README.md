@@ -44,6 +44,7 @@ At `nextjs-app/`:
 - Tailwind CSS v4 (plus custom CSS variables)
 - MongoDB + Mongoose
 - Resend (transactional email)
+- Twilio WhatsApp API (internal alerts)
 - Stripe (payment intent creation)
 
 ## Features
@@ -79,6 +80,13 @@ At `nextjs-app/`:
 - Order confirmation emails (only when a valid email is provided)
 - Contact acknowledgement emails
 
+### WhatsApp integration (internal alerts)
+
+- New order alerts to owner WhatsApp
+- New reservation alerts to owner WhatsApp
+- New contact form alerts to owner WhatsApp
+- Admin smoke-test endpoint: `POST /api/admin/whatsapp-test`
+
 ### Menu data tools
 
 - Seed script to populate menu items in MongoDB: `npm run seed:menu`
@@ -91,6 +99,7 @@ At `nextjs-app/`:
 - `GET /api/orders` list orders
 - `POST /api/contacts` create contact message
 - `GET /api/contacts` list contact messages
+- `POST /api/admin/whatsapp-test` send a WhatsApp smoke-test message (admin cookie or token header)
 - `GET /api/menu-items` list menu items (optional `?category=` filter)
 - `POST /api/menu-items` create menu item
 - `PUT /api/menu-items/[id]` update menu item
@@ -123,6 +132,15 @@ Used by features:
 
 - `RESEND_API_KEY`
 - `RESEND_FROM_EMAIL`
+- `TWILIO_ACCOUNT_SID`
+- `TWILIO_AUTH_TOKEN`
+- `TWILIO_WHATSAPP_FROM`
+- `ORDER_NOTIFICATION_WHATSAPP_TO`
+- `TWILIO_ORDER_CONTENT_SID` (optional)
+- `TWILIO_RESERVATION_CONTENT_SID` (optional)
+- `TWILIO_CONTACT_CONTENT_SID` (optional)
+- `TWILIO_TEST_CONTENT_SID` (optional)
+- `WHATSAPP_TEST_TOKEN` (optional, for calling WhatsApp test endpoint without admin UI cookie)
 - `STRIPE_SECRET_KEY`
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
 - `JWT_SECRET`
@@ -133,7 +151,55 @@ Used by features:
 Notes:
 
 - If `RESEND_API_KEY` is missing/invalid, the app still works but skips sending emails.
+- If Twilio WhatsApp vars are missing, form/order/reservation creation still succeeds and only email notifications are sent.
+- If Twilio Content SID vars are provided, WhatsApp notifications use template messages (`ContentSid` + `ContentVariables`).
+- If Twilio Content SID vars are not provided, WhatsApp notifications use plain text (`Body`) as fallback.
+- Twilio sandbox recipients must join the sandbox every 72 hours (`join <sandbox-name>`) for WhatsApp delivery.
 - Stripe is only used when `paymentMethod === credit_card`.
+
+## Production Notification Checklist
+
+Use this checklist when setting up or troubleshooting production notifications.
+
+1. Configure Vercel Production env vars:
+  - `RESEND_API_KEY`
+  - `RESEND_FROM_EMAIL`
+  - `ORDER_NOTIFICATION_EMAIL`
+  - `TWILIO_ACCOUNT_SID`
+  - `TWILIO_AUTH_TOKEN`
+  - `TWILIO_WHATSAPP_FROM`
+  - `ORDER_NOTIFICATION_WHATSAPP_TO`
+  - `TWILIO_ORDER_CONTENT_SID` (optional)
+  - `TWILIO_RESERVATION_CONTENT_SID` (optional)
+  - `TWILIO_CONTACT_CONTENT_SID` (optional)
+  - `TWILIO_TEST_CONTENT_SID` (optional)
+
+2. Redeploy after env changes:
+  - `npx vercel --prod --yes`
+
+3. Validate order notifications:
+  - Submit `POST /api/orders`
+  - Confirm email log: `notification:restaurant-order-notification sent`
+  - Confirm WhatsApp log: `notification:restaurant-order-whatsapp sent`
+
+4. Validate reservation notifications:
+  - Submit `POST /api/reservations`
+  - Confirm email log: `notification:restaurant-reservation-notification sent`
+  - Confirm WhatsApp log: `notification:restaurant-reservation-whatsapp sent`
+
+5. Validate contact notifications:
+  - Submit `POST /api/contacts` with valid subject (`general`, `catering`, `events`, `feedback`)
+  - Confirm email log: `notification:restaurant-contact-notification sent`
+  - Confirm WhatsApp log: `notification:restaurant-contact-whatsapp sent`
+
+6. Validate admin smoke endpoint:
+  - Call `POST /api/admin/whatsapp-test` (admin cookie or `x-whatsapp-test-token`)
+  - Confirm log: `notification:restaurant-whatsapp-test sent`
+
+7. Twilio Sandbox checks (trial accounts):
+  - Join sandbox from recipient phone (`join <sandbox-name>`)
+  - Rejoin every 72 hours
+  - Ensure recipient has not sent `stop`
 
 ## Local Development
 
@@ -182,6 +248,8 @@ Open `http://localhost:3000`.
 - dev: `npm run dev`
 
 Set all required environment variables in Vercel project settings.
+
+If you add or change Twilio variables in Vercel, redeploy once so the new values are applied to production functions.
 
 ### VPS/VM (Node + PM2 + Nginx)
 

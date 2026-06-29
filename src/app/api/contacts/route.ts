@@ -1,6 +1,7 @@
 import { connectDB } from '@/lib/db';
 import Contact from '@/lib/models/Contact';
 import { sendContactReply, sendRestaurantContactNotification } from '@/lib/email';
+import { sendRestaurantContactWhatsappNotification } from '@/lib/whatsapp';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -40,6 +41,14 @@ export async function POST(request: NextRequest) {
         subject: subject || 'general',
         message,
       }),
+      sendRestaurantContactWhatsappNotification({
+        contactId: contact._id.toString(),
+        name,
+        email,
+        phone: phone || '',
+        subject: subject || 'general',
+        message,
+      }),
       sendContactReply(email, name, message),
     ]);
 
@@ -48,7 +57,11 @@ export async function POST(request: NextRequest) {
     }
 
     if (notificationResults[1].status === 'rejected') {
-      console.error('Contact auto-reply failed after save:', notificationResults[1].reason);
+      console.error('Contact WhatsApp notification failed after save:', notificationResults[1].reason);
+    }
+
+    if (notificationResults[2].status === 'rejected') {
+      console.error('Contact auto-reply failed after save:', notificationResults[2].reason);
     }
 
     return NextResponse.json(
